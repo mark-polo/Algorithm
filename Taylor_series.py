@@ -1,90 +1,52 @@
-import math
+import os
+
+from TaylorSeries import TaylorSeries
+from Color import bgColor
+import pyfiglet
+
+ascii_banner = pyfiglet.figlet_format("Welcome to Taylor series  by Marko Polo ")
 
 
-def convert_degree_to_radiant(degree):
-   
-   # для того щоб конвертувати кут у градусах у
-   # радіани
-   # слід скласти пропорцію виду
-   # 180  degree 
-   #   π  x
-   # Виходячи з цього x = (π * degree)/180
+class Main:
+    interrupter = True
+    global taylorSeries
 
-   converter = (math.pi * degree) / 180
+    while interrupter:
+        print(bgColor.CBLUE, f"{ascii_banner}")
 
-   return converter 
+        print(bgColor.CYELLOW, """
+                Введіть опцію обрахувння
+                
+                1. Sin
+                
+                2. Cos 
+                
+                3. ln(x + 1)
+                
+                4. Arctan
+                
+                5. Exit
+        """)
 
+        enterOption = int(input("Enter options : "))
 
-def sin (degree , n = 20):
+        enterDegree = int(input("Enter degree : "))
+        enterCountOfCycle = int(input("Enter count of cycle : "))
+        taylorSeries = TaylorSeries(enterDegree, enterCountOfCycle)
 
-  # Для того щоб обрахувати синус чи косинус
-  # використовується ряд Тейлора 
-  # чи Маклорена
-
-  x = convert_degree_to_radiant(degree)
-  
-  result = 0
-  
-  
-  for i in range(0, n + 1):
-     first_part_of_formula = ((-1)**i) * (x ** 
-  ((2 * i) + 1))
-    
-     second_part_of_formula = math.factorial((2 *     i) + 1)
-     
-     result  += (first_part_of_formula / 
-  second_part_of_formula) 
-  
-    
-  return result  
-
-
-def cos(degree , n = 30):
-   
-   x = convert_degree_to_radiant(degree)
-
-   result = 0
-  
-  
-   for i in range(0, n + 1):
-     first_part_of_formula = x ** (2 * i)
-    
-     second_part_of_formula = math.factorial(2 *     i)
-     
-     result += ((-1) ** i) * (first_part_of_formula / 
-  second_part_of_formula) 
-  
-   return result 
-  
-  
-def exp(x, n = 20):
-
-   # Розрахунок за рядом Тейлора e^x
-   
-   result = 0
-   
-   for i in range(0, n):
-      
-      first_part_of_formula = x ** i
-      second_part_of_formula = math.factorial(i)
-      
-      result += (first_part_of_formula / second_part_of_formula)
-   
-   return result 
-
+        if enterOption == 1:
+            print(bgColor.CBLACK, f"Sin :  {taylorSeries.sin()}")
+        elif enterOption == 2:
+            print(bgColor.CBLACK, f"Cos :  {taylorSeries.sin()}")
+        elif enterOption == 3:
+            enterX = float(input("Enter x : "))
+            print(bgColor.CBLACK, f"Ln(x + 1) :  {taylorSeries.ln(enterX)}")
+        elif enterOption == 4:
+            print(bgColor.CBLACK, f"Arctan :  {taylorSeries.arctan()}")
+        elif enterOption == 5:
+            interrupter = False
+            os.system("clear")
 
 
 if __name__ == '__main__':
-   print(f"convert :  {convert_degree_to_radiant(45)}")
-   print()
-   print(f"sin : {sin(45)}")
-   print()
-   print(f"Значення яке видає вбудованна функція синусу : {math.sin(convert_degree_to_radiant(45))}")
-   print()
-   print(f"cos : {cos(45)}")
-   print()
-   print(f"Значення яке видає вбудованна функція косинусу : {math.cos(convert_degree_to_radiant(45))}")
-   print()
-   print(f"exp : {exp(5)}")
-   print()
-   print(f"Значення яке видає функція ееспоненти у степені  : {math.exp(5)}")
+    main = Main()
