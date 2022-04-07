@@ -69,9 +69,7 @@ class TaylorSeries:
                 second_part_of_formula = i
                 result = ((-1) ** (i - 1)) * (first_part_of_formula / second_part_of_formula)
 
-
         return result
-
 
     def arctan(self):
 
